@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <template id="report_inventory_cost" inherit_id="stock.report_inventory" primary="True">
+        <xpath position="inside" expr="//table[2]//thead/tr">
+            <th class="text-right"><strong>Cost</strong></th>
+            <th class="text-right"><strong>Subtotal</strong></th>
+        </xpath>
+        <xpath position="inside" expr="//table[2]//tbody//tr[2]">
+            <td class="text-right"><span t-field="line.product_id.standard_price" /></td>
+            <td class="text-right"><span t-esc="line.product_id.standard_price * line.product_qty" /></td>
+        </xpath>
+        <xpath position="inside" expr="//div[hasclass('page')]">
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                     <table class="table table-condensed">
+                        <tr class="border-black">
+                            <td><strong>Total</strong></td>
+                            <td class="text-right">
+                                <span t-esc="sum([line.product_id.standard_price * line.product_qty for line in o.line_ids])"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <report
+        string="Inventory with cost"
+        id="action_report_inventory_cost"
+        model="stock.inventory"
+        report_type="qweb-pdf"
+        name="stock.report_inventory_cost"
+        file="stock.report_inventory_cost"
+        print_report_name="'Inventory - %s' % (object.name)"
+    />
+
+    </data>
+</odoo>
