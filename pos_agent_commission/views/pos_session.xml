@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="pos_session_view_form_inherit_commission" model="ir.ui.view">
+            <field name="name">pos.session.commission</field>
+            <field name="model">pos.session</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//button[@name='action_pos_session_validate']" position="after">
+                        <button name="pay_commission" string="Pay Commission" type="object" states="closed" class="oe_highlight"/>
+                        <button name="print_quotation" string="Print Commission Receipt" type="object" states="closed" class="btn-primary o_sale_print"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

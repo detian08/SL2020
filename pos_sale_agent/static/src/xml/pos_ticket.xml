@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+
+<t t-extend="PosTicket">
+    <t t-jquery="div[class*='company_info']" t-operation="replace">
+        <div class="company_info">
+                <span  class="company_name"><t t-esc="widget.pos.config.name"/></span><br />
+				<strong>Terminal:</strong> <t t-esc="widget.pos.config.name || ''"/><br />
+				<!--VAT: <t t-esc="widget.pos.company.vat || ''"/><br /> -->
+				<strong>Served By:</strong> <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name"/><br />
+            <t t-if="widget.pos.get_agent()">
+            <strong>Agent:</strong> <t t-esc="widget.pos.get_agent().name"/><br />
+        </t>
+            </div>
+
+    </t>
+</t>
+
+
+
+
+
+</templates>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="pos_pivot_view_form_inherit_commission" model="ir.ui.view">
+            <field name="name">pos.pivot.commission</field>
+            <field name="model">report.pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_report_pos_order_pivot"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='price_total']" position="after">
+                        <field name="total_commission" type="measure"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

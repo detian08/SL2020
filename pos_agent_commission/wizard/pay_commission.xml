@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="pay_commission_form" model="ir.ui.view">
+                <field name="name">Pay Commission</field>
+                <field name="model">pay.commission.wizard</field>
+                <field name="arch" type="xml">
+                        <form string="Commission Details">
+                            <sheet>
+                                <group>
+                                    <field name="pay_journal"/>
+                                    <field name="commission_line_ids">
+                                        <tree editable="bottom" create="0">
+                                            <field name="agent_name" />
+                                            <field name="total_commission" readonly="1"/>
+                                            <field name="commissin_to_pay"/>
+
+                                        </tree>
+                                    </field>
+                                    <field name="amount"/>
+                                </group>
+                            </sheet>
+                            <footer>
+                                <button name="validate_payment" string="Validate" type="object" class="oe_highlight" />
+                                <button special="cancel" string="Cancel" class="oe_highlight" />
+                            </footer>
+                        </form>
+                </field>
+        </record>
+
+
+
+
+
+         <record id="act_window_id_pay_commission" model="ir.actions.act_window">
+            <field name="name">Pay Commission</field>
+            <field name="res_model">pay.commission.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="target">new</field>
+        </record>
+
+
+
+
+
+    </data>
+</odoo>

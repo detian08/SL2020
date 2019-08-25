@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="agent_commission_report_format" model="report.paperformat">
+        <field name="name">Agent Commission Report</field>
+        <field name="default" eval="False"/>
+        <field name="format">custom</field>
+        <field name="page_height">100</field>
+        <field name="page_width">80</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">15</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">10</field>
+        <field name="dpi">90</field>
+    </record>
+
+
+    <report
+            id="action_report_sale_agent"
+            string="Commission Ledger"
+            model="pos.session"
+            report_type="qweb-pdf"
+            file="pos_agent_commission.report_saleorder"
+            name="pos_agent_commission.report_saleorder"
+            print_report_name="'Commission Ledger - %s' % (object.name)"
+            paperformat="pos_agent_commission.agent_commission_report_format"
+
+    />
+    <!--report header-->
+    <template id="custom_report_header">
+        <div class="header">
+            <div class="col-xs-12">
+                <div class="col-xs-3" style="border:1px solid gray">
+                    <img t-attf-src="data:image/*;base64,{{widget.pos.config.logo}}"
+                         style="max-height: 100px;max-width:100px;"/>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-4;align-right">
+                </div>
+            </div>
+        </div>
+    </template>
+    <!--report footer-->
+    <template id="custom_report_footer">
+        <div class="footer">
+        </div>
+    </template>
+
+    <template id="report_saleorder">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="pos_agent_commission.report_saleorder_document"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_saleorder_document">
+
+        <!-- Re-browse of the record with the partner lang -->
+       <div class="header">
+            <div class="col-xs-12">
+                <div class="col-xs-3" style="border:1px solid gray">
+                    <img t-attf-src="data:image/*;base64,{{doc.config_id.logo}}"
+                         style="max-height: 100px;max-width:100px;"/>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-4;align-right">
+                </div>
+            </div>
+        </div>
+        <t t-call="pos_agent_commission.custom_report_footer">
+        </t>
+        <t t-call="web.external_layout">
+            <t t-foreach="doc.session_commission_ids" t-as="com">
+                <div class="page">
+                    <div class="oe_structure"/>
+
+                    <div class="mr32">
+                        <h3 align="left">
+                            <span style="font-weight:bold;">Commission Ledger</span>
+                        </h3>
+                    </div>
+                    <div>
+                        <div t-if="doc.name" class="mr32">
+                            <p t-field="doc.name" style="font-weight:2px;"/>
+                        </div>
+                        <div t-if="doc.stop_at" class="mr32">
+                            <p t-field="doc.stop_at" style="font-weight:2px;"/>
+                        </div>
+                        <div t-if="com.agent_id" class="mr32">
+                            <p t-field="com.agent_id.name" style="font-weight:2px;"/>
+                        </div>
+                    </div>
+                    <table>
+                        <tbody class="col-xs-12">
+                            <tr style="height:1px; border: 2px solid black;font-weight:bold;">
+                                <td class="col-xs-4" style="height:1px; border: 2px solid black;font-weight:bold;">
+                                    Order
+                                </td>
+                                <td class="col-xs-4" style="height:1px; border: 2px solid black;font-weight:bold;">Total
+                                    Amount
+                                </td>
+                                <td class="col-xs-4" style="height:1px; border: 2px solid black;font-weight:bold;">Total
+                                    Commission
+                                </td>
+
+                            </tr>
+                            <t t-foreach="com.commission_ids" t-as="data">
+
+                                <tr style="height:1px; border: 1px solid black;">
+                                    <td class="col-xs-4" style="height:1px; border: 1px solid black;">
+                                        <span t-field="data.order_id.name">&gt;</span>
+
+                                    </td>
+                                    <td class="col-xs-4" style="height:1px; border: 1px solid black;">
+                                        <span t-field="data.amount"/>
+
+                                    </td>
+                                    <td class="col-xs-4" style="height:1px; border: 1px solid black;">
+                                        <span t-field="data.total_commission"/>
+                                    </td>
+                                </tr>
+
+                            </t>
+                            <tr>
+                                <td colspan="3"
+                                    style="text-align: left;height:1px; border: 1px solid black;font-weight:bold;text-align:right;">
+                                    <t t-esc="sum(l.total_commission for l in com.commission_ids) "/>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="oe_structure"/>
+                </div>
+                <p style="page-break-before:always;"></p>
+                 <div class="header">
+            <div class="col-xs-12">
+                <div class="col-xs-3" style="border:1px solid gray">
+                    <img t-attf-src="data:image/*;base64,{{doc.config_id.logo}}"
+                         style="max-height: 100px;max-width:100px;"/>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-4;align-right">
+                </div>
+            </div>
+        </div>
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="mr32">
+                        <h5 align="left">
+                            <span style="font-weight:bold;">Commission Payment receipt</span>
+                        </h5>
+                    </div>
+                    <br/>
+                    <div t-if="doc.stop_at" class="mr32">
+                        <h6>
+                            <span style="font-weight:bold;">Date:</span>
+                        </h6>
+                        <span t-field="doc.stop_at" style="font-weight:2px;"/>
+                    </div>
+                    <br/>
+                    <div t-if="com.agent_id" class="mr32">
+                        <h6>
+                            <span style="font-weight:bold;">Agent:</span>
+                        </h6>
+                        <span t-field="com.agent_id.name" style="font-weight:2px;"/>
+                    </div>
+                    <br/>
+                    <div t-if="com.commision_paid" class="mr32">
+                        <h6>
+                            <span style="font-weight:bold;">Total Commission Paid:</span>
+                        </h6>
+                        <span t-field="com.commision_paid" style="font-weight:2px;"/>
+                    </div>
+                    <br/>
+                    <div>
+                        <h6 align="center">
+                            <span style="font-weight:bold;">Signature</span>
+                        </h6>
+                    </div>
+                </div>
+                <p style="page-break-before:always;"></p>
+            </t>
+        </t>
+    </template>
+
+    <template id="web.external_layout_standard">
+        <div class="header">
+            <div class="row">
+                <!--<div class="col-3 mb4">-->
+                    <!--<img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/>-->
+                <!--</div>-->
+                <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+            </div>
+            <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                <div class="col-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6" name="company_address">
+                    <div t-field="company.partner_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div class="article o_report_layout_standard"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <li t-if="company.phone" class="list-inline-item">Phone: <span t-field="company.phone"/></li>
+                    <li t-if="company.email" class="list-inline-item">Email: <span t-field="company.email"/></li>
+                    <li t-if="company.website" class="list-inline-item">Web: <span t-field="company.website"/></li>
+                    <li t-if="company.vat" class="list-inline-item"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>
+                </ul>
+
+                <div name="financial_infos">
+                    <span t-field="company.report_footer"/>
+                </div>
+
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+</odoo>

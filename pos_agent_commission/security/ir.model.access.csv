@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_agent,session.agents,model_session_agents,base.group_user,1,1,1,1
+access_sale_agent_line,session.agent.lines,model_session_agent_lines,base.group_user,1,1,1,1
+access_sale_commission_line,agent.commission.pay,model_agent_commission_pay,base.group_user,1,1,1,1
