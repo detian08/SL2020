@@ -2,6 +2,16 @@
 <odoo>
     <data>
 
+        <record id="view_pos_pos_form" model="ir.ui.view">
+            <field name="name">pos.order.form</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="agent_id"/>
+                </xpath>
+            </field>
+        </record>
 
         <record id="crm_team_view_form" model="ir.ui.view">
             <field name="name">crm.team.form</field>
@@ -51,7 +61,6 @@
                                         <field name="barcode"/>
                                         <field name="pin"/>
                                     </group>
-
                                 </group>
                             </page>
                         </notebook>

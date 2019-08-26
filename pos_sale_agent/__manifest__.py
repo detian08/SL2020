@@ -10,7 +10,7 @@
     'description': """
     """,
     'depends': [
-        'pos_sale','hr','point_of_sale','aar_pos_ticket'
+        'pos_sale',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -19,7 +19,6 @@
         'data/barcode_patterns.xml',
     ],
     'qweb': [
-        'static/src/xml/pos_ticket.xml'
     ],
     'installable': True,
     'auto_install': False,

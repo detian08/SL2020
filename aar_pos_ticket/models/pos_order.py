@@ -9,13 +9,10 @@
 #    License:  OPL-1
 ####################   AARSOL      ####################
 
-from odoo import api, fields, models, _,tools
+from odoo import api, fields, models, _
 import base64
 import json
 import logging
-import os
-import re
-
 
 _logger = logging.getLogger(__name__)
 
@@ -34,13 +31,3 @@ class pos_order(models.Model):
             })
             
         return order_fields
-
-class PosConfig(models.Model):
-
-    _inherit = "pos.config"
-
-    def _get_logo(self):
-        return base64.b64encode(open(os.path.join(tools.config['root_path'], 'addons', 'base', 'static', 'img', 'res_company_logo.png'), 'rb') .read())
-
-
-    logo = fields.Binary(default=_get_logo, string="Point Of Sale Logo", readonly=False)

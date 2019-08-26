@@ -1,0 +1,30 @@
+<odoo>
+    <record model="ir.ui.view" id="pos_session_control_inherit_form_view">
+        <field name="name">pos.session.form.view.inherit</field>
+        <field name="model">pos.session</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='statement_ids']" position="attributes">
+                <attribute name="groups">pos_session_control.group_session_control</attribute>
+            </xpath>
+            <xpath expr="//separator[1]" position="attributes">
+                <attribute name="groups">pos_session_control.group_session_control</attribute>
+            </xpath>
+            <xpath expr="//label[1]" position="attributes">
+                <attribute name="groups">pos_session_control.group_session_control</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cash_register_total_entry_encoding']" position="attributes">
+                <attribute name="groups">pos_session_control.group_session_control</attribute>
+            </xpath>
+            <xpath expr="//label[2]" position="attributes">
+                <attribute name="groups">pos_session_control.group_session_control</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cash_register_balance_end']" position="attributes">
+                <attribute name="groups">pos_session_control.group_session_control</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cash_register_difference']" position="attributes">
+                <attribute name="groups">pos_session_control.group_session_control</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

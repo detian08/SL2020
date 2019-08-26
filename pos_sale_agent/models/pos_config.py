@@ -19,10 +19,8 @@ class PosOrdrer(models.Model):
         'Agent',
     )
 
-
     @api.model
     def _order_fields(self, ui_order):
         res = super(PosOrdrer, self)._order_fields(ui_order)
         res['agent_id'] = ui_order['agent_id']
         return res
-
