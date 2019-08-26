@@ -5,18 +5,17 @@
     <t t-jquery="div[class*='pos-sale-ticket']" t-operation="replace">
     
     <div class="pos-sale-ticket">        
-        <div class="company_card">                
+        <div class="company_card">
+			<div align="center" style="margin-top: 3px;"><img id="barcode" style="height: 100px;"/></div>
             <div class="company_info">
-                <span  class="company_name"><t t-esc="widget.pos.company.name"/></span><br />
-				<t t-esc="widget.pos.company.street"/>, <t t-esc="widget.pos.company.city"/>, <t t-esc="widget.pos.company.country.name"/><br />
-				<strong>Phone:</strong> <t t-esc="widget.pos.company.phone || ''"/><br />
-				<strong>Website:</strong> <t t-esc="widget.pos.company.website || ''"/><br />
+                <span  class="company_name"><t t-esc="widget.pos.config.name"/></span><br />
 				<strong>Terminal:</strong> <t t-esc="widget.pos.config.name || ''"/><br />					
 				<!--VAT: <t t-esc="widget.pos.company.vat || ''"/><br /> -->
 				<strong>Served By:</strong> <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name"/>    
             </div>
             <div class="company_logo">
-                <img src='/web/binary/company_logo' style="width:100%"/>
+               <img t-attf-src="data:image/*;base64,{{widget.pos.config.logo}}" style="width:100%;"/>
+
             </div>                
         </div>
             
@@ -130,10 +129,65 @@
 			</div>
 		</t>
 		
-		<div align="center" style="margin-top: 3px;"><img id="barcode" style="height: 100px;"/></div>				
+
 		
        
     </div>
+		<p style="page-break-before:always;"> </p>
+
+		<!--Second receipt-->
+
+		<div class="pos-sale-ticket">
+        <div class="company_card">
+			<div align="center" style="margin-top: 3px;"><img id="barcode" style="height: 100px;"/></div>
+            <div class="company_info">
+                <span  class="company_name"><t t-esc="widget.pos.config.name"/></span><br />
+				<strong>Terminal:</strong> <t t-esc="widget.pos.config.name || ''"/><br />
+				<!--VAT: <t t-esc="widget.pos.company.vat || ''"/><br /> -->
+				<strong>Served By:</strong> <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name"/>
+            </div>
+            <div class="company_logo">
+               <img t-attf-src="data:image/*;base64,{{widget.pos.config.logo}}" style="width:100%;"/>
+
+            </div>
+        </div>
+
+        <div name="order_info">
+	        Date: <t t-esc="moment().format('L LT')"/> <br />
+	        Receipt: <t t-esc="order.name"/><br />
+	        <t t-set="client" t-value="order.get_client()"/>
+			<t t-if="client and widget.pos.config.receipt_customer_vat">
+				<t t-set="client" t-value="order.get_client()"/>
+				Customer: <t t-esc="client['name']"/><br />
+				Phone (mobile): <t t-esc="client['phone'] || client['mobile'] || ''"/>
+			</t>
+			<br />
+		</div>
+
+	    <t t-if="receipt.header">
+	        <div style='text-align:center'>
+	            <t t-esc="receipt.header" />
+	        </div>
+	    </t>
+
+
+		<br />
+
+
+
+		<t t-if="receipt.footer">
+			<br />
+			<div style='text-align:center'>
+				<t t-esc="receipt.footer" />
+			</div>
+		</t>
+
+
+
+
+    </div>
+
+
     </t>
     
 </t> 

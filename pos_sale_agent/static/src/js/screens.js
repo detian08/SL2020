@@ -2081,7 +2081,16 @@ var PaymentScreenWidget = ScreenWidget.extend({
     // and complete the sale process
     validate_order: function(force_validation) {
         if (this.order_is_valid(force_validation)) {
+            console.log(this.pos.get_agent());
+        if (this.pos.get_agent()){
             this.finalize_validation();
+        }
+        else{
+        self.gui.show_popup('error',{
+                        'title': _t("Agent Not Found"),
+                        'body':  _t("The order could not be sent to the server due to an unknown agent"),
+                    });
+        }
         }
     },
 });

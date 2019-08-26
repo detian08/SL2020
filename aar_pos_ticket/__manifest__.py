@@ -15,7 +15,7 @@
 {
     'name': 'POS Ticket Logo and Barcode',
     'summary': """POS Receipt with Barcode and Logo""",
-    'version': '11.0.1.0',
+    'version': '12.0.1.0',
     'description': """POS Receipt with Barcode and Logo""",
     'author': 'AARSOL (Pvt) Limited.',
     'company': 'AARSOL (Pvt) Limited.',
