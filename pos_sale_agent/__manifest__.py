@@ -10,7 +10,7 @@
     'description': """
     """,
     'depends': [
-        'pos_sale','hr','point_of_sale','aar_pos_ticket'
+        'pos_sale','hr','point_of_sale'
     ],
     'data': [
         'security/ir.model.access.csv',
