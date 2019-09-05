@@ -29,7 +29,7 @@
 
     />
     <!--report header-->
-    <template id="custom_report_header">
+    <!--template id="custom_report_header">
         <div class="header">
             <div class="col-xs-12">
                 <div class="col-xs-3" style="border:1px solid gray">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-    </template>
+    </template-->
     <!--report footer-->
     <template id="custom_report_footer">
         <div class="footer">
