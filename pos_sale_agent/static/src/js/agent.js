@@ -174,14 +174,14 @@ odoo.define('pos_sale_agent.agent', function (require) {
     });
 
 
+	var _super_posmodel = models.PosModel.prototype;
     models.PosModel = models.PosModel.extend({
         initialize: function (session, attributes) {
-            var pos = models.PosModel.__super__.initialize.call(this, session, attributes);
             this.set({
                 'agent': null,
             });
             var agents = [];
-            return pos;
+            return _super_posmodel.initialize.call(this,session,attributes);
         },
         set_agent: function (agent) {
 
