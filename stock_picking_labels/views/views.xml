@@ -1,12 +1,30 @@
 <odoo>
   <data>
     <!-- Picking Labels -->
-        <report id="action_picking_labels"
-                string="Product Labels"
+        <report id="action_picking_labels_new"
+                string="Products Labels"
                 model="stock.picking"
                 report_type="qweb-pdf"
                 file="stock_picking_labels.templates"
-                name="stock_picking_labels.picking_labels"
+                name="stock_picking_labels.product_picking_labels"
+                attachment_use="False"
+        />
+    <!-- Picking Labels -->
+        <report id="action_picking_labels_product"
+                string="Product Label"
+                model="product.template"
+                report_type="qweb-pdf"
+                file="stock_picking_labels.templates"
+                name="stock_picking_labels.product_template_picking_labels"
+                attachment_use="False"
+        />
+    <!-- Picking Labels -->
+        <report id="action_picking_labels_product_product"
+                string="Product Label"
+                model="product.product"
+                report_type="qweb-pdf"
+                file="stock_picking_labels.templates"
+                name="stock_picking_labels.product_product_picking_labels"
                 attachment_use="False"
         />
   </data>
