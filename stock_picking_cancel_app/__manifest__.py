@@ -2,7 +2,7 @@
 {
     'name': 'Stock Picking Cancel and Reset',
     "author": "Edge Technologies",
-    'version': '12.0.1.1',
+    'version': '12.0.1.6',
     'live_test_url': "https://youtu.be/ZTdzRLz0Leo",
     "images":['static/description/main_screenshot.png'],
     'summary': " Using this app user can Cancel and Reset Done Delivery order and incoming shipment, Same works for all kind of picking.",
@@ -24,7 +24,7 @@ Ractify stock picking Ractify delivery order Ractify incoming shipment Ractify i
             ],
     'installable': True,
     'auto_install': False,
-    'price': 15,
+    'price': 22,
     'currency': "EUR",
     'category': 'Warehouse',
 
