@@ -7,7 +7,11 @@ odoo.define('point_of_sale_extend.pos', function(require) {
     models.Order = models.Order.extend({
         initialize: function() {
             _super_order.initialize.apply(this, arguments);
-            this.to_invoice = true;
+            if (this.pos.config.invoicing_mnd) {
+                this.to_invoice = true;
+            } else {
+                this.to_invoice = false;
+            }
         },
 
     });

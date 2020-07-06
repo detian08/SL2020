@@ -7,6 +7,7 @@
     'depends': ['point_of_sale'],
     'data': [
         'views/assets.xml',
+        'views/pos.xml',
     ],
 
     'qweb': ['static/src/xml/pos.xml'],
