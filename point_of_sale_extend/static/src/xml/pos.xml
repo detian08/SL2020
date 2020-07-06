@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="ClientDetailsEdit">
+        <t t-jquery=".client-details-left" t-operation="replace">
+                    <div class='client-detail'>
+                        <span class='label'>City</span>
+                        <input class='detail client-address-city' name='city' t-att-value='partner.city || ""'
+                               placeholder='City'></input>
+                    </div>
+        </t>
+        <t t-jquery=".client-details-right" t-operation="replace">
+                    <div class='client-detail'>
+                        <span class='label'>Phone</span>
+                        <input class='detail client-phone' name='phone' type='tel'
+                               t-att-value='partner.phone || ""'></input>
+                    </div>
+        </t>
+    </t>
+    <t t-extend="ClientDetails">
+        <t t-jquery=".client-details-left" t-operation="replace">
+            <div class='client-detail'>
+                <span class='label'>City</span>
+                <t t-if='partner.address'>
+                    <span class='detail client-address'><t t-esc='partner.city' /></span>
+                </t>
+                <t t-if='!partner.address'>
+                    <span class='detail client-address empty'>N/A</span>
+                </t>
+            </div>
+            <div class='client-detail'>
+                        <span class='label'>Phone</span>
+                <t t-if='partner.phone'>
+                            <span class='detail client-phone'><t t-esc='partner.phone' /></span>
+                        </t>
+                <t t-if='!partner.phone'>
+                            <span class='detail client-phone empty'>N/A</span>
+                        </t>
+                    </div>
+        </t>
+        <t t-jquery=".client-details-right" t-operation="replace"/>
+    </t>
+</templates>
