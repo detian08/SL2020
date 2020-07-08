@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="assets_backend" inherit_id="web.assets_backend">
+    <template id="assets_point_of_sale" inherit_id="point_of_sale.assets">
         <xpath expr="." position="inside">
             <script type="text/javascript" src="/point_of_sale_extend/static/src/js/pos.js"></script>
         </xpath>
+        
+    <xpath expr="//script[contains(@src, '/point_of_sale/static/src/js/screens.js')]" position="replace">
+            <script type="text/javascript" src="/point_of_sale_extend/static/src/js/screens.js"></script>
+    </xpath>
+
     </template>
+    
 </odoo>
