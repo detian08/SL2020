@@ -46,7 +46,7 @@ DB.include({
             }
 
             var multi_barcode = product.product_multi_barcodes;
-            if (typeof multi_barcode === 'undefined' || multi_barcode.length === 0) {
+            if (typeof multi_barcode === 'undefined' || typeof product === 'undefined') {
                 return;
             }
             for(var t=0;t < multi_barcode.length;t++){
