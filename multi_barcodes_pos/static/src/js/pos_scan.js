@@ -1,9 +1,10 @@
 odoo.define('multi_barcodes_pos.product', function (require) {
-    "use strict";
+"use strict";
 var rpc = require('web.rpc');
+var core = require('web.core');
 var models = require('point_of_sale.models');
 var DB = require('point_of_sale.DB');
-models.load_fields("product.product", ['product_multi_barcodes']);
+models.load_fields('product.product','product_multi_barcodes');
 DB.include({
     init: function(options){
         this._super.apply(this, arguments);
@@ -43,7 +44,12 @@ DB.include({
             if(product.barcode){
                 this.product_by_barcode[product.barcode] = product;
             }
-            for(var t=0;t < product.product_multi_barcodes.length;t++){
+
+            var multi_barcode = product.product_multi_barcodes;
+            if (typeof multi_barcode === 'undefined' || multi_barcode.length === 0) {
+                return;
+            }
+            for(var t=0;t < multi_barcode.length;t++){
                 var self = this;
                 rpc.query({
                 model: 'multi.barcode.products',

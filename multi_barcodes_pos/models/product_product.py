@@ -1,25 +1,5 @@
 # -*- coding: utf-8 -*-
-###################################################################################
-#
-#    Cybrosys Technologies Pvt. Ltd.
-#
-#    Copyright (C) 2020-TODAY Cybrosys Technologies (<https://www.cybrosys.com>).
-#    Author: Risha C.T (<https://www.cybrosys.com>)
-#
-#    This program is free software: you can modify
-#    it under the terms of the GNU Affero General Public License (AGPL) as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-###################################################################################
+
 
 from odoo import models, fields, api ,_
 from odoo.osv import expression
@@ -55,7 +35,6 @@ class ProductProduct(models.Model):
     @api.model
     def _name_search(self, name, args=None, operator='ilike', limit=100, name_get_uid=None):
         args = args or []
-        print("666666666666666")
         domain = []
         if name:
             domain = ['|', '|', ('name', operator, name), ('default_code', operator, name),
@@ -144,4 +123,3 @@ class ProductMultiBarcode(models.Model):
     def get_barcode_val(self, product):
         # returns barcode of record in self and product id
         return self.multi_barcode, product
-
